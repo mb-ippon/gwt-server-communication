@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="com.ippon.formation.gwt.client.ui.resources.ApplicationResources" field="res" />
+	<ui:style>
+		
+	</ui:style>
+	<g:HTMLPanel styleName="large-3 columns">
+		<div class="panel">
+			<ul class="side-nav">
+				<li>
+					<g:Button ui:field="playerList" styleName="small button" text="{res.getMessages.link_playerlist}"/>
+				</li>
+				<li>
+					<g:Button ui:field="tournamentList" styleName="small button" text="{res.getMessages.link_tournamentlist}"/>
+				</li>
+			</ul>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

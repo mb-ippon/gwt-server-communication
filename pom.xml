@@ -2,23 +2,32 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ippon.formation</groupId>
-	<artifactId>basic-mvn-gwt</artifactId>
-	<version>1.0</version>
+	<artifactId>gwt-server-communication</artifactId>
+	<version>0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
 		<!-- project config -->
+		<!-- dependencies -->
+		<guava.version>13.0.1</guava.version>
+		<!-- plugin -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webapp.directory>${project.build.directory}/war</webapp.directory>
 		<output.directory>${webapp.directory}/WEB-INF/classes</output.directory>
 		<project.webxml>${webapp.directory}/WEB-INF/web.xml</project.webxml>
+		<project.java.source>${basedir}/src/main/java</project.java.source>
+		
 
 		<!-- gwt configuration -->
+		<!-- dependencies -->
 		<gwt.version>2.5.1</gwt.version>
+		<!-- plugin -->
 		<gwt.module>com.ippon.formation.gwt.Formation_GWT</gwt.module>
 		<gwt.target>welcome.html</gwt.target>
-		<gwt.rpc.path>**/domain/bindery/*RPC.java</gwt.rpc.path>
+		<gwt.rpc.path>**/*RPC.java</gwt.rpc.path>
 		<gwt.rpc.scan>com.ippon.formation.gwt.server.rpc</gwt.rpc.scan>
+		<gwt.view.css>com/ippon/formation/gwt/client/ui/view/MyCss.css</gwt.view.css>
+		<gwt.i18n>com.ippon.formation.gwt.client.ui.resources.Messages</gwt.i18n>
 	</properties>
 
 	<dependencies>
@@ -36,6 +45,18 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -52,6 +73,15 @@
 					<module>${gwt.module}</module>
 					<runTarget>${gwt.target}</runTarget>
 					<copyWebapp>true</copyWebapp>
+					<!-- gwt:css config -->
+					<generateDirectory>${project.java.source}</generateDirectory>
+					<cssFiles>
+						<cssFile>${gwt.view.css}</cssFile>
+					</cssFiles>
+					<!-- gwt:i18n config -->
+					<i18nMessagesBundles>
+						<i18nMessagesBundle>${gwt.i18n}</i18nMessagesBundle>
+					</i18nMessagesBundles>
 					<!-- gwt:generateAsync config -->
 					<servicePattern>${gwt.rpc.path}</servicePattern>
 					<!-- gwt:mergewebxml config -->
@@ -68,6 +98,14 @@
 						<goals>
 							<goal>compile</goal>
 							<goal>mergewebxml</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>gwt-generate</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>css</goal>
+							<goal>i18n</goal>
 						</goals>
 					</execution>
 				</executions>
