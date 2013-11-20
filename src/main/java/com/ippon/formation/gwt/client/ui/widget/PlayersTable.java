@@ -1,27 +1,33 @@
 package com.ippon.formation.gwt.client.ui.widget;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-import com.google.gwt.cell.client.DateCell;
+import com.google.gwt.cell.client.NumberCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.ColumnSortEvent;
+import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
-import com.google.gwt.view.client.MultiSelectionModel;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
-import com.google.gwt.view.client.SelectionModel;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
+import com.google.gwt.view.client.SelectionChangeEvent.HasSelectionChangedHandlers;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
 import com.ippon.formation.gwt.shared.domain.entities.Player;
 
-public class PlayersTable extends CellTable<Player> {
+public class PlayersTable extends CellTable<Player> implements HasSelectionChangedHandlers {
 
     public PlayersTable() {
+        super(15, ApplicationResources.getCellTableCss(), KEY_PROVIDER);
         // Create a CellTable.
         this.setWidth("100%", true);
-
         // Do not refresh the headers and footers every time the data is updated.
         this.setAutoHeaderRefreshDisabled(true);
         this.setAutoFooterRefreshDisabled(true);
@@ -32,13 +38,18 @@ public class PlayersTable extends CellTable<Player> {
         pager.setDisplay(this);
 
         // Add a selection model so we can select cells.
-        final SelectionModel<Player> selectionModel = new MultiSelectionModel<Player>(KEY_PROVIDER);
         this.setSelectionModel(selectionModel);
-
+        // data provider
+        dataProvider.setList(new ArrayList<Player>());
+        dataProvider.addDataDisplay(this);
+        sortHandler = new ListHandler<Player>(dataProvider.getList());
+        // loadingIndicator
         this.setLoadingIndicator(new LoadingPanel());
 
         // Initialize the columns.
         initTableColumns();
+        // sort handler
+        this.addColumnSortHandler(sortHandler);
     }
 
     /**
@@ -49,21 +60,27 @@ public class PlayersTable extends CellTable<Player> {
         Column<Player, String> nameColumn = new Column<Player, String>(new TextCell()) {
             @Override
             public String getValue(Player object) {
-                // Get the value from the selection model.
                 return object.getName();
             }
         };
         this.addColumn(nameColumn, ApplicationResources.getMessages().cell_player_name());
 
-        Column<Player, Date> birthDayColumn = new Column<Player, Date>(new DateCell(
-                DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_FULL))) {
+        Column<Player, Number> atpPointColumn = new Column<Player, Number>(new NumberCell()) {
             @Override
-            public Date getValue(Player object) {
-                // Get the value from the selection model.
-                return object.getBirthDay();
+            public Integer getValue(Player object) {
+                return object.getAtpPoint();
             }
         };
-        this.addColumn(birthDayColumn, ApplicationResources.getMessages().cell_player_birthday());
+        atpPointColumn.setDefaultSortAscending(false);
+        sortHandler.setComparator(atpPointColumn, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return o1.getAtpPoint().compareTo(o2.getAtpPoint());
+            }
+        });
+        this.addColumn(atpPointColumn, ApplicationResources.getMessages().cell_player_atpPoint());
+        // sort column
+        this.getColumnSortList().push(atpPointColumn);
     }
 
     /**
@@ -75,4 +92,27 @@ public class PlayersTable extends CellTable<Player> {
             return item == null ? null : item.getName();
         }
     };
+
+    public static final SingleSelectionModel<Player> selectionModel = new SingleSelectionModel<Player>(KEY_PROVIDER);
+
+    ListDataProvider<Player> dataProvider = new ListDataProvider<Player>(KEY_PROVIDER);
+
+    // init des tris sur les colonnes
+    ListHandler<Player> sortHandler;
+
+    @Override
+    public HandlerRegistration addSelectionChangeHandler(Handler handler) {
+        return selectionModel.addSelectionChangeHandler(handler);
+    }
+
+    public Player getSelectedItem() {
+        return selectionModel.getSelectedObject();
+    }
+
+    public void setData(List<Player> players) {
+        dataProvider.getList().clear();
+        dataProvider.getList().addAll(players);
+        dataProvider.refresh();
+        ColumnSortEvent.fire(this, this.getColumnSortList());
+    }
 }

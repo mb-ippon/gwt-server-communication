@@ -3,8 +3,35 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:view="urn:import:com.ippon.formation.gwt.client.ui.view">
 	<ui:style>
-		.custom{
-			max-width: 90em;
+		footer{
+			background: #333;
+			padding: 24px 0 10px;
+			color: white;
+			font-family: "Proxima Nova", "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+		}
+		header{
+			background: #1399bd;
+			height : 135px;
+			color: white;
+			font-family: "Proxima Nova", "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+		header h1{
+			color: #fff;
+			font-weight: 500;
+		}
+		header h4{
+			color: #fff;
+			font-weight: 300;
+		}
+		.content{
+			margin-top: 44px;
+			margin-bottom: 22px;
+			padding-bottom: 22px;
+			max-width: 60em;
+			height: 100%;
 		}
 	</ui:style>
 	<g:HTMLPanel>
@@ -12,36 +39,36 @@
 			<img style="position: absolute; top: 0; right: 0; border: 0;" 
 				src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"/>
 		</a>
-		<div class="row {style.custom}">
-			<div class="large-12 columns">
-
+		<header>
+			<div class="row">
+		    	<div class="twelve columns">
+		      		<h1>GWT server communication</h1>
+		        	<h4>Presentation of GWT-RPC and Request Builder</h4>
+		    	</div>
+		    </div>
+		</header>
+		<section id="mainContent" class="row {style.content}">
+			<div class="large-6 columns">
+				<view:PlayersViewImpl ui:field="classement"/>
 			</div>
-		</div>
-		<div class="row {style.custom}">
-			<view:NavBar />
-			<div class="large-9 columns">
-				<div class="panel">
-					<g:SimplePanel ui:field="content" />
+			<div class="large-6 columns">
+				<view:PlayerViewImpl ui:field="player"/>
+			</div>
+		</section>
+		<footer>
+			<div class="row">
+				<div class="large-6 columns">
+					<p>Design with <a href="http://foundation.zurb.com/">Foundation</a></p>
 				</div>
-			</div>
-		</div>
-		<footer class="row {style.custom}">
-			<div class="large-12 columns">
-				<hr />
-				<div class="row">
-					<div class="large-6 columns">
-						<p>Design with <a href="http://foundation.zurb.com/">Foundation</a></p>
-					</div>
-					<div class="large-6 columns">
-						<ul class="inline-list right">
-							<li>
-								<a href="http://www.ippon.fr/">Ippon Technologies</a>
-							</li>
-							<li>
-								<a href="http://blog.ippon.fr/">Blog Ippon Technologies</a>
-							</li>
-						</ul>
-					</div>
+				<div class="large-6 columns">
+					<ul class="inline-list right">
+						<li>
+							<a href="http://www.ippon.fr/">Ippon Technologies</a>
+						</li>
+						<li>
+							<a href="http://blog.ippon.fr/">Blog Ippon Technologies</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</footer>

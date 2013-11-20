@@ -6,6 +6,6 @@
 		
 	</ui:style>
 	<g:HTMLPanel>
-		<widget:PlayersTable />
+		<widget:PlayersTable ui:field="playersTable"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 

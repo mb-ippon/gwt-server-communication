@@ -1,0 +1,67 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:date="urn:import:com.google.gwt.user.datepicker.client">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel styleName="panel">
+		<form>
+			<div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">Name</label>
+			    </div>
+			    <div class="small-9 columns">
+			    	<g:TextBox ui:field="name"></g:TextBox>	
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="height" class="left inline">Height</label>
+			    </div>
+			    <div class="small-9 columns">
+			         <g:IntegerBox ui:field="height"></g:IntegerBox>	
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">Weight</label>
+			    </div>
+			    <div class="small-9 columns">
+			         <g:IntegerBox ui:field="weight"></g:IntegerBox>	
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">Birth day</label>
+			    </div>
+			    <div class="small-9 columns">
+			         <date:DateBox ui:field="birthDay"></date:DateBox>	
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">Play hand</label>
+			    </div>
+			    <div class="small-9 columns">
+			        <g:TextBox ui:field="playHand"></g:TextBox>		
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">Year turned pro</label>
+			    </div>
+			    <div class="small-9 columns">
+			        <g:IntegerBox ui:field="yearTurnPro"></g:IntegerBox>		
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-3 columns">
+			    	<label for="name" class="left inline">ATP point</label>
+			    </div>
+			    <div class="small-9 columns">
+			        <g:IntegerBox ui:field="atpPoint"></g:IntegerBox>		
+			    </div>
+			  </div>
+		</form>
+	</g:HTMLPanel>
+</ui:UiBinder> 

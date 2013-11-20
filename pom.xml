@@ -10,12 +10,15 @@
 		<!-- project config -->
 		<!-- dependencies -->
 		<guava.version>13.0.1</guava.version>
+		<joda.version>2.2</joda.version>
 		<!-- plugin -->
+		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webapp.directory>${project.build.directory}/war</webapp.directory>
 		<output.directory>${webapp.directory}/WEB-INF/classes</output.directory>
 		<project.webxml>${webapp.directory}/WEB-INF/web.xml</project.webxml>
 		<project.java.source>${basedir}/src/main/java</project.java.source>
+		<maven-compiler.version>2.5.1</maven-compiler.version>
 		
 
 		<!-- gwt configuration -->
@@ -53,9 +56,14 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava-gwt</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.2</version>
+			<version>${joda.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -110,6 +118,17 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- plugin pour la compilation de TxplanOnline -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
 		</plugins>
 	</build>
 </project>
