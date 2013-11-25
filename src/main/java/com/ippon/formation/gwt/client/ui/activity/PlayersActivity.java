@@ -6,7 +6,7 @@ import com.ippon.formation.gwt.client.ui.view.PlayersView;
 import com.ippon.formation.gwt.shared.domain.entities.Player;
 
 /**
- * L'activity de la grid des joueurs
+ * Activity du l'écran des joueurs
  * 
  * @author mbellang
  * 
@@ -26,7 +26,6 @@ public class PlayersActivity implements PlayersView.Presenter {
      */
     public void go() {
         display.loadingTable();
-
     }
 
     @Override

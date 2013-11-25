@@ -44,7 +44,6 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerRPC
                 2002, 3300, new Country("FRA", "France")));
     }
 
-    @Override
     public List<Player> findClassement() {
         return Lists.newArrayList(Lists.transform(players, new Function<Player, Player>() {
 
@@ -58,7 +57,6 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerRPC
         }));
     }
 
-    @Override
     public Player findPlayer(String name) {
         Player playerToReturn = null;
         for (Player player : players) {
