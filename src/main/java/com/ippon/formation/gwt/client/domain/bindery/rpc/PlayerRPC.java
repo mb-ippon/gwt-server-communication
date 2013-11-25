@@ -10,4 +10,7 @@ import com.ippon.formation.gwt.shared.domain.entities.Player;
 public interface PlayerRPC extends RemoteService {
 
     List<Player> findClassement();
+
+    Player findPlayer(String name);
+
 }

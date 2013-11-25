@@ -58,6 +58,7 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerRPC
         }));
     }
 
+    @Override
     public Player findPlayer(String name) {
         Player playerToReturn = null;
         for (Player player : players) {

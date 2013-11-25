@@ -2,6 +2,9 @@ package com.ippon.formation.gwt.client.ui.activity;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.ippon.formation.gwt.client.domain.bindery.rpc.PlayerRPCAsync;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerHandler;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
@@ -20,6 +23,7 @@ public class PlayerActivity implements Presenter {
 
     private final PlayerView display;
     private final PlayerDriver playerDriver = PlayerDriver.Util.getInstance();
+    private final PlayerRPCAsync server = PlayerRPCAsync.Util.getInstance();
 
     public PlayerActivity(PlayerView display) {
         this.display = display;
@@ -53,7 +57,18 @@ public class PlayerActivity implements Presenter {
      * @param player
      */
     protected void displayPlayer(Player player) {
+        server.findPlayer(player.getName(), new AsyncCallback<Player>() {
 
+            @Override
+            public void onSuccess(Player result) {
+                playerDriver.edit(result);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+        });
     }
 
     private void bind() {
