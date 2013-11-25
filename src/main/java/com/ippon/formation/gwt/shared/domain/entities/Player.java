@@ -1,14 +1,21 @@
 package com.ippon.formation.gwt.shared.domain.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Player {
+public class Player implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4312165633377357234L;
 
     public Player() {
 
     }
 
-    public Player(String name, int height, int weight, Date birthDay, Plays playHand, int yearTurnPro, Integer atpPoint) {
+    public Player(String name, int height, int weight, Date birthDay, Plays playHand, int yearTurnPro,
+            Integer atpPoint, Country country) {
         this.name = name;
         this.height = height;
         this.playHand = playHand;
@@ -16,15 +23,32 @@ public class Player {
         this.weight = weight;
         this.yearTurnPro = yearTurnPro;
         this.atpPoint = atpPoint;
+        this.country = country;
     }
 
-    // name of the player
     private String name;
     private Date birthDay;
     private int height;
     private int weight;
     private int yearTurnPro;
     private Integer atpPoint;
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setAtpPoint(Integer atpPoint) {
+        this.atpPoint = atpPoint;
+    }
 
     // the way which he plays
     private Plays playHand;

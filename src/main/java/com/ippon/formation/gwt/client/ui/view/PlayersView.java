@@ -11,6 +11,8 @@ public interface PlayersView extends IsWidget {
 
     void setPresenter(Presenter playersActivity);
 
+    void loadingTable();
+
     public interface Presenter {
 
         void onCellTableSelected(Player player);

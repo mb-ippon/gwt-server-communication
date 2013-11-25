@@ -42,8 +42,8 @@
 		<header>
 			<div class="row">
 		    	<div class="twelve columns">
-		      		<h1>GWT server communication</h1>
-		        	<h4>Presentation of GWT-RPC and Request Builder</h4>
+		      		<h1 ui:field="title"></h1>
+		        	<h4 ui:field="exercise"></h4>
 		    	</div>
 		    </div>
 		</header>

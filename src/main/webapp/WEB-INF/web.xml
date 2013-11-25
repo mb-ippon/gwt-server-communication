@@ -4,6 +4,17 @@
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
+         
+	<servlet>
+	  <servlet-name>playerService</servlet-name>
+	  <servlet-class>
+	    com.ippon.formation.gwt.server.service.PlayerServiceImpl
+	  </servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>playerService</servlet-name>
+	  <url-pattern>/FormationGWT/player</url-pattern>
+	</servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

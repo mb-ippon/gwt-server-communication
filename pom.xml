@@ -19,7 +19,6 @@
 		<project.webxml>${webapp.directory}/WEB-INF/web.xml</project.webxml>
 		<project.java.source>${basedir}/src/main/java</project.java.source>
 		<maven-compiler.version>2.5.1</maven-compiler.version>
-		
 
 		<!-- gwt configuration -->
 		<!-- dependencies -->
@@ -27,8 +26,7 @@
 		<!-- plugin -->
 		<gwt.module>com.ippon.formation.gwt.Formation_GWT</gwt.module>
 		<gwt.target>welcome.html</gwt.target>
-		<gwt.rpc.path>**/*RPC.java</gwt.rpc.path>
-		<gwt.rpc.scan>com.ippon.formation.gwt.server.rpc</gwt.rpc.scan>
+		<gwt.rpc.path>**/domain/bindery/rpc/*RPC.java</gwt.rpc.path>
 		<gwt.view.css>com/ippon/formation/gwt/client/ui/view/MyCss.css</gwt.view.css>
 		<gwt.i18n>com.ippon.formation.gwt.client.ui.resources.Messages</gwt.i18n>
 	</properties>
@@ -92,11 +90,6 @@
 					</i18nMessagesBundles>
 					<!-- gwt:generateAsync config -->
 					<servicePattern>${gwt.rpc.path}</servicePattern>
-					<!-- gwt:mergewebxml config -->
-					<mergedWebXml>${project.webxml}</mergedWebXml>
-					<packageNamePerModule>
-						<FormationGWT>${gwt.rpc.scan}</FormationGWT>
-					</packageNamePerModule>
 					<scanRemoteServiceRelativePathAnnotation>true</scanRemoteServiceRelativePathAnnotation>
 				</configuration>
 				<executions>
@@ -105,7 +98,6 @@
 						<phase>compile</phase>
 						<goals>
 							<goal>compile</goal>
-							<goal>mergewebxml</goal>
 						</goals>
 					</execution>
 					<execution>

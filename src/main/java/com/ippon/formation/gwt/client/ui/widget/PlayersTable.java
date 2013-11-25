@@ -52,6 +52,12 @@ public class PlayersTable extends CellTable<Player> implements HasSelectionChang
         this.addColumnSortHandler(sortHandler);
     }
 
+    public void loadingTable() {
+        // permet de simuler le chargement de la grid
+        this.setRowCount(1, true);
+        this.setVisibleRangeAndClearData(this.getVisibleRange(), true);
+    }
+
     /**
      * Add the columns to the table.
      */

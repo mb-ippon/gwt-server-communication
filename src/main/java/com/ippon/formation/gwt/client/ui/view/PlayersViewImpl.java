@@ -44,4 +44,9 @@ public class PlayersViewImpl extends Composite implements PlayersView {
         this.activity = playersActivity;
     }
 
+    @Override
+    public void loadingTable() {
+        playersTable.loadingTable();
+    }
+
 }

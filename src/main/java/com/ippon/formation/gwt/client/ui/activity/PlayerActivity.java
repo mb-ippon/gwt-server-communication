@@ -10,6 +10,12 @@ import com.ippon.formation.gwt.client.ui.view.PlayerView.Presenter;
 import com.ippon.formation.gwt.client.ui.view.PlayerViewImpl;
 import com.ippon.formation.gwt.shared.domain.entities.Player;
 
+/**
+ * Activity du l'écran détaillé d'un joueur
+ * 
+ * @author mbellang
+ * 
+ */
 public class PlayerActivity implements Presenter {
 
     private final PlayerView display;
@@ -20,6 +26,12 @@ public class PlayerActivity implements Presenter {
         bind();
     }
 
+    /**
+     * Driver data binding
+     * 
+     * @author mbellang
+     * 
+     */
     public interface PlayerDriver extends SimpleBeanEditorDriver<Player, PlayerViewImpl> {
 
         public class Util {
@@ -35,8 +47,13 @@ public class PlayerActivity implements Presenter {
         }
     }
 
+    /**
+     * Affiche le détail d'un joueur
+     * 
+     * @param player
+     */
     protected void displayPlayer(Player player) {
-        playerDriver.edit(player);
+
     }
 
     private void bind() {
